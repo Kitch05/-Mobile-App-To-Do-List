@@ -1,9 +1,17 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
 
 import 'package:flutter/material.dart';
 
 class Task extends StatelessWidget {
-  const Task({super.key});
+  final String task;
+  final bool accomplished;
+  Function(bool?)? onChanged;
+
+  Task(
+      {super.key,
+      required this.task,
+      required this.accomplished,
+      required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +25,19 @@ class Task extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(
-            value: false,
-            onChanged: null,
+            value: accomplished,
+            onChanged: onChanged,
           ),
           Text(
-            "Make a task",
-            style: TextStyle(fontSize: 16),
+            task,
+            style: TextStyle(
+                fontSize: 16,
+                decoration: accomplished
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none),
           )
         ],
       ),
     );
   }
 }
-
-void toggle() {}
