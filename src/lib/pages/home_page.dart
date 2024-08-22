@@ -55,6 +55,11 @@ class _HomePageState extends State<HomePage> {
             return Task(
               task: taskList[index][0],
               accomplished: taskList[index][1],
+              deleteTask: (context) {
+                setState(() {
+                  taskList.removeAt(index);
+                });
+              },
               onChanged: (p0) {
                 setState(() {
                   taskList[index][1] = !taskList[index][1];
